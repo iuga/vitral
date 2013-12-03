@@ -1,0 +1,33 @@
+/* app css stylesheet */
+body{
+    padding-top: 70px;
+    background-color: #414042 !important;
+}
+
+.vitral-example{
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.vitral-image-big{
+
+}
+
+.vitral-image-small{
+
+}
+
+.vitral-img{
+    padding: 5px !important;
+}
+
+.col-vitral{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.row-vitral {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+

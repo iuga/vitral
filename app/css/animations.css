@@ -1,0 +1,21 @@
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+.spinner{
+    background-repeat:no-repeat;
+    background-position:50% 50%;
+    -moz-animation:spin .8s infinite linear;
+    -o-animation:spin .8s infinite linear;
+    -webkit-animation:spin .8s infinite linear;
+    animation:spin .8s infinite linear
+}
