@@ -21,6 +21,13 @@ body{
     padding: 5px !important;
 }
 
+.img-vitral{
+    padding: 5px !important;
+    max-height: 200px;
+    max-width: 200px;
+    overflow: hidden;
+}
+
 .col-vitral{
     padding-left: 0px !important;
     padding-right: 0px !important;

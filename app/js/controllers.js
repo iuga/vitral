@@ -4,7 +4,7 @@ var module = angular.module('vitral', ['vitral.services']);
 
 module.controller('vitralController', ['$scope','$http','appConfig', function ($scope, $http, appConfig) {
     
-    var imageList = Array();
+    var imageList = [];
     var offset = 0;
     var limit = appConfig.page_limit;
     
@@ -41,13 +41,17 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
         }).
         success(function(data, status, headers, config) {
             if(status===200){
-                imageList = { highlighted: Array(), images: Array()};
-                var key;
-                for(key in data.response){
-                     imageList.images.push({image_url:data.response[key].normal_image, image_label:data.response[key].cleanCaption});
-                     preload(data.response[key].normal_image);
-                }
-                $scope.imageBundle = imageList;
+                imageList = [];
+                
+                angular.forEach(data.response, function(value){
+                    imageList.push({
+                        image_url:value.normal_image, 
+                        image_label:value.cleanCaption
+                    });
+                    preload(value.normal_image);
+                });
+
+                $scope.imageList = imageList;
             }
         }).
         error(function(data, status, headers, config) {
@@ -65,9 +69,12 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
     
 }])
 
-.directive('vitralGallery', ['appConfig', function(appConfig) {
-    return function(scope, elm, attrs) {
-        console.log(attrs);
-        elm.text(appConfig.photorankUrl);
-    };
-  }]);;
+.directive('ngVitralgallery', ['appConfig', function(appConfig) {
+    return {
+       restrict: 'A',
+       templateUrl: 'partials/ng-mock.html',
+       link: function(scope, element, attrs, ngModel) {
+            console.log(ngModel);
+       }
+     };
+  }]);
