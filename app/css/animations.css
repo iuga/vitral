@@ -19,3 +19,7 @@
     -webkit-animation:spin .8s infinite linear;
     animation:spin .8s infinite linear
 }
+
+.opacity-response:hover {
+    opacity:0.5;
+}

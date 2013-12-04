@@ -34,7 +34,10 @@
     
     <div class="container">
       <div class="starter-template">
-        <div class="vitral-example" ng-controller="ImageVitralController as vitralController">
+        <div class="vitral-example" ng-controller="vitralController">
+            
+            
+            <div vitral-gallery></div>
             
             <a href="" ng-click="previousPage()">Previous Page</a>
             <a href="" ng-click="nextPage()">Next Page</a>
@@ -64,79 +67,79 @@
                 <div class="col-md-4 col-vitral">
                     <div class="row row-vitral">
                         <div class="col-md-12 col-vitral">
-                            <img class="img-responsive vitral-img" src="{{imageBundle.highlighted[0].image_url}}"/>
+                            <img class="img-responsive vitral-img" src="{{imageBundle.images[0].image_url}}"/>
                         </div>
                     </div>
                     <div class="row row-vitral">
                         <div class="col-md-12 col-vitral">
                             <div class="row row-vitral">
-                                <div class="col-md-6 col-vitral">
-                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[0].image_url}}"/>
-                                </div>
                                 <div class="col-md-6 col-vitral">
                                     <img  class="img-responsive vitral-img" src="{{imageBundle.images[1].image_url}}"/>
                                 </div>
-                            </div>
-                            <div class="row row-vitral">
                                 <div class="col-md-6 col-vitral">
                                     <img  class="img-responsive vitral-img" src="{{imageBundle.images[2].image_url}}"/>
                                 </div>
+                            </div>
+                            <div class="row row-vitral">
                                 <div class="col-md-6 col-vitral">
                                     <img  class="img-responsive vitral-img" src="{{imageBundle.images[3].image_url}}"/>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-vitral">
-                    <div class="row row-vitral">
-                        <div class="col-md-12 col-vitral">
-                            <div class="row row-vitral">
                                 <div class="col-md-6 col-vitral">
                                     <img  class="img-responsive vitral-img" src="{{imageBundle.images[4].image_url}}"/>
                                 </div>
-                                <div class="col-md-6 col-vitral">
-                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[5].image_url}}"/>
-                                </div>
                             </div>
-                            <div class="row row-vitral">
-                                <div class="col-md-6 col-vitral">
-                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[6].image_url}}"/>
-                                </div>
-                                <div class="col-md-6 col-vitral">
-                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[7].image_url}}"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-vitral">
-                        <div class="col-md-12 col-vitral">
-                            <img class="img-responsive vitral-img" src="{{imageBundle.highlighted[1].image_url}}"/>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 col-vitral">
                     <div class="row row-vitral">
                         <div class="col-md-12 col-vitral">
-                            <img class="img-responsive vitral-img" src="{{imageBundle.highlighted[2].image_url}}"/>
+                            <div class="row row-vitral">
+                                <div class="col-md-6 col-vitral">
+                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[5].image_url}}"/>
+                                </div>
+                                <div class="col-md-6 col-vitral">
+                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[6].image_url}}"/>
+                                </div>
+                            </div>
+                            <div class="row row-vitral">
+                                <div class="col-md-6 col-vitral">
+                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[7].image_url}}"/>
+                                </div>
+                                <div class="col-md-6 col-vitral">
+                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[8].image_url}}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-vitral">
+                        <div class="col-md-12 col-vitral">
+                            <img class="img-responsive vitral-img" src="{{imageBundle.images[9].image_url}}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-vitral">
+                    <div class="row row-vitral">
+                        <div class="col-md-12 col-vitral">
+                            <img class="img-responsive vitral-img" src="{{imageBundle.images[10].image_url}}"/>
                         </div>
                     </div>
                     <div class="row row-vitral">
                         <div class="col-md-12 col-vitral">
                             <div class="row row-vitral">
                                 <div class="col-md-6 col-vitral">
-                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[8].image_url}}"/>
+                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[11].image_url}}"/>
                                 </div>
                                 <div class="col-md-6 col-vitral">
-                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[9].image_url}}"/>
+                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[12].image_url}}"/>
                                 </div>
                             </div>
                             <div class="row row-vitral">
                                 <div class="col-md-6 col-vitral">
-                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[10].image_url}}"/>
+                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[13].image_url}}"/>
                                 </div>
                                 <div class="col-md-6 col-vitral">
-                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[11].image_url}}"/>
+                                    <img  class="img-responsive vitral-img" src="{{imageBundle.images[14].image_url}}"/>
                                 </div>
                             </div>
                         </div>

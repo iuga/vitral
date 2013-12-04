@@ -1,25 +1,15 @@
 'use strict';
 
-var VitralModule = angular.module('vitral', []);
+var module = angular.module('vitral', ['vitral.services']);
 
-VitralModule.controller('ImageVitralController', function ($scope, $http) {
+module.controller('vitralController', ['$scope','$http','appConfig', function ($scope, $http, appConfig) {
     
-    var imageBundle;
-    var imageList;
-    var offset;
-    var limit;
+    var imageList = Array();
+    var offset = 0;
+    var limit = appConfig.page_limit;
     
-    var test = "Hola Mundo!";
-    
-    $scope.init = function(){
+    $scope.init = function(){        
         
-        imageBundle = { highlighted: Array(), images: Array() };
-        
-        imageList = new Array();
-        offset = 0;
-        limit = 15;
-        $scope.imageList = imageList;
-        $scope.loadImages();
     };
     
     $scope.nextPage = function()
@@ -42,41 +32,27 @@ VitralModule.controller('ImageVitralController', function ($scope, $http) {
     
     $scope.loadImages = function()
     {
-        $http.get('https://www.photorank.me/api/v1/photos/',
-        { 
-            params: 
-            {
-                api_key:'0a40a13fd9d531110b4d6515ef0d6c529acdb59e81194132356a1b8903790c18',
+        $http.get(appConfig.photorankUrl, { 
+            params: {
+                api_key:appConfig.photorankKey,
                 limit:limit,
                 offset:offset
             }
-        }
-        ).
+        }).
         success(function(data, status, headers, config) {
             if(status===200){
-                imageList = new Array();
-                imageBundle.highlighted = new Array();
-                imageBundle.images = new Array();
+                imageList = { highlighted: Array(), images: Array()};
                 var key;
                 for(key in data.response){
-                     console.log(data.response[key].normal_image+' - '+data.response[key].cleanCaption);
-                     
-                     imageList.push({image_url:data.response[key].normal_image, image_label:data.response[key].cleanCaption});
-                     
-                     if(key==="0" || key==="1" || key==="2"){
-                         imageBundle.highlighted.push({image_url:data.response[key].normal_image, image_label:data.response[key].cleanCaption});
-                     }else{
-                         imageBundle.images.push({image_url:data.response[key].normal_image, image_label:data.response[key].cleanCaption});
-                     }
-                    
+                     imageList.images.push({image_url:data.response[key].normal_image, image_label:data.response[key].cleanCaption});
                      preload(data.response[key].normal_image);
                 }
-                $scope.imageList = imageList;
-                $scope.imageBundle = imageBundle;
+                $scope.imageBundle = imageList;
             }
         }).
         error(function(data, status, headers, config) {
-            imageList = [ {message:'Error'}];
+            //TODO: Show a message
+            console.log("Error retriving data"+status);
         });
     };    
     
@@ -85,5 +61,13 @@ VitralModule.controller('ImageVitralController', function ($scope, $http) {
     }
     
     $scope.init();
+    $scope.loadImages();
     
-});
+}])
+
+.directive('vitralGallery', ['appConfig', function(appConfig) {
+    return function(scope, elm, attrs) {
+        console.log(attrs);
+        elm.text(appConfig.photorankUrl);
+    };
+  }]);;
