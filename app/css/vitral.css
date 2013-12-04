@@ -5,8 +5,13 @@
 	background-color: #414042;
 }
 
-.row {
-	padding:10px !important;
+.no-space {
+	padding: 0px !important;
+	margin : 0px !important;
+}
+
+.row-marg {
+	margin-bottom:25px !important;
 }
 
 .content-centered {
@@ -35,6 +40,7 @@
 }
 
 .element-inner{
+	margin: 5px !important; /* Distance between images */
     position: absolute;
     top: 0;
     bottom: 0;
