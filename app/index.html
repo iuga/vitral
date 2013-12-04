@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>Vitral Demo</title>
   <link rel="stylesheet" href="css/app.css"/>
+  <link rel="stylesheet" href="css/vitral.css"/>
   <link rel="stylesheet" href="css/animations.css"/>
   <link rel="stylesheet" href="css/bootstrap.min.css"/>
   <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
@@ -32,40 +33,36 @@
       </div>
     </div>  
     
-    <div class="container">
-      <div class="starter-template">
-        <div class="vitral-example" ng-controller="vitralController as vitralController">
-            
+
+    <div class="vitral-example" ng-controller="vitralController as vitralController">
+
             <div ng-vitralgallery></div>
-            
-            <div class="loading" style="text-align: center;">
-                <img class="spinner" src="img/olapic-logo.png"/>
-            </div>
 
     </div>
 
-  <script src="lib/angular/angular.js"></script>
-  <script src="lib/angular/angular-route.js"></script>
-  <script src="lib/angular/angular-resource.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery.transit.min.js"></script>
-  <script src="js/services.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script>
-  
-  <script type="text/javascript">           
-      $('.spinner').transition({ scale: [0,0], duration:5 }).transition({ scale: [1,1], duration:500 });
-      
-      $(".vitral-img").mouseover(function(){
-        $( this ).animate({ opacity: 0.3 }, 200 );
-      })
-     .mouseout(function() {
-        $( this ).animate({ opacity: 1 }, 200 );
-      });;
-  </script>
+
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular/angular-route.js"></script>
+	<script src="lib/angular/angular-resource.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.transit.min.js"></script>
+	<script src="js/services.js"></script>
+	<script src="js/controllers.js"></script>
+	<script src="js/filters.js"></script>
+	<script src="js/directives.js"></script>
+
+	<script type="text/javascript">           
+	  $('.spinner').transition({ scale: [0,0], duration:5 }).transition({ scale: [1,1], duration:500 });
+	  
+	  $(".vitral-img").mouseover(function(){
+		$( this ).animate({ opacity: 0.3 }, 200 );
+	  })
+	 .mouseout(function() {
+		$( this ).animate({ opacity: 1 }, 200 );
+	  });;
+	</script>
   
 </body>
 </html>

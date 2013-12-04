@@ -72,6 +72,7 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
 .directive('ngVitralgallery', ['appConfig', function(appConfig) {
     return {
        restrict: 'A',
+       transclude: true,
        templateUrl: 'partials/ng-mock.html',
        link: function(scope, element, attrs, ngModel) {
             console.log(ngModel);
