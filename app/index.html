@@ -34,8 +34,10 @@
     </div>  
     
         <div class="vitral-example" ng-controller="vitralController as vitralController">
-                <div ng-vitralgallery></div>
+                <div ng-vitralgallery class="vitral"></div>
         </div>
+
+		<div class="loading-spinner"></div>
 
 	<script src="lib/angular/angular.js"></script>
 	<script src="lib/angular/angular-route.js"></script>
@@ -48,17 +50,6 @@
 	<script src="js/controllers.js"></script>
 	<script src="js/filters.js"></script>
 	<script src="js/directives.js"></script>
-
-	<script type="text/javascript">           
-	  $('.spinner').transition({ scale: [0,0], duration:5 }).transition({ scale: [1,1], duration:500 });
-	  
-	  $(".vitral-img").mouseover(function(){
-		$( this ).animate({ opacity: 0.3 }, 200 );
-	  })
-	 .mouseout(function() {
-		$( this ).animate({ opacity: 1 }, 200 );
-	  });;
-	</script>
   
 </body>
 </html>

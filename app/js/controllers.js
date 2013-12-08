@@ -55,7 +55,6 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
             }
         }).
         error(function(data, status, headers, config) {
-            //TODO: Show a message
             console.log("Error retriving data"+status);
         });
     };    
@@ -69,13 +68,29 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
     
 }])
 
-.directive('ngVitralgallery', ['appConfig', function(appConfig) {
+.directive('ngVitralgallery', ['appConfig','$animate', function(appConfig, $animate) {
     return {
        restrict: 'A',
        transclude: true,
        templateUrl: 'partials/ng-mock.html',
        link: function(scope, element, attrs, ngModel) {
-            console.log(ngModel);
+			var vitralizeGallery = function () {
+			}	
        }
      };
-  }]);
+  }])
+
+.directive('ngImageload',['$animate', function($animate) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('load', function() {
+				var imgContainer =  $(element).parent('.element-inner');
+				$animate.addClass(imgContainer, 'element-spin-and-show');
+				$animate.removeClass(imgContainer, 'element-hidden');
+				imgContainer.find('.loading').addClass('element-hidden');
+            });
+        }
+    };
+}]);
+

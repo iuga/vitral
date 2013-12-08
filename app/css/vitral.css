@@ -50,6 +50,7 @@
 
 .element-inner img {
     background-color: #333333;
+	display:hidden;
 }
 
 .img-vitral {
@@ -65,6 +66,11 @@
 	-ms-transform-origin: 50% 50%;
 	-o-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
+}
+
+.element-hidden {
+	opacity: 0;
+	display:hidde;
 }
 
 .img-vitral:hover {
