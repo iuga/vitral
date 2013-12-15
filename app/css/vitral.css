@@ -73,11 +73,6 @@
 	display:hidde;
 }
 
-/*.img-vitral:hover {
-	filter: alpha(opacity=40);
-	opacity: 0.4;
-}*/
-
 .img-loading-wrapper {
     bottom: 40%;
     display: block;
@@ -86,4 +81,58 @@
     position: absolute;
     right: 40%;
     top: 40%;
+}
+
+/* HOVER EFFECTS */
+
+.element-inner:hover > .element-caption {
+    opacity:0.9;
+    background-color:#000;
+    color: #FFF;
+    -webkit-transform: scale(1);
+    font-size: 12px;
+    top: 0%;
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+}
+
+.element-inner:hover > .img-vitral {
+    -webkit-transform: rotate(45deg) scale(2);
+    -webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+}
+
+.element-caption p {
+    position: absolute;    
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 10px;   
+    -webkit-transform: scale(1);
+}
+
+.element-caption {
+    opacity: 0;
+    -webkit-transform: scale(20);
+
+    vertical-align:text-bottom;
+    
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 20px;
+    padding: 10px;
+    padding-top: 15px;
+    margin: -1px;
+    text-align:center;
+
+    position: absolute;
+    top: 200%;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

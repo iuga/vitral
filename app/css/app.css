@@ -16,4 +16,9 @@ body{
     padding-top: 70px;
     margin: 0;
     background-color: #414042 !important;
+
+    background: white url('../img/background.jpg') no-repeat 0 0;
+    background-attachment: fixed;
+    background-size: cover;
+
 }
