@@ -33,6 +33,42 @@
 	}
 }
 
+@-moz-keyframes beizer-bounce {  
+        0%, 100% {
+                -webkit-transform: translateX(0px);
+        }
+        10%, 30%, 50%, 70%, 90% {
+                -webkit-transform: translateX(-10px);
+        }
+        20%, 40%, 60%, 80% {
+                -webkit-transform: translateX(10px);
+        }
+} 
+
+@-webkit-keyframes  beizer-bounce {
+        0%, 100% {
+                -moz-transform: translateX(0px);
+        }
+        10%, 30%, 50%, 70%, 90% {
+                -moz-transform: translateX(-10px);
+        }
+        20%, 40%, 60%, 80% {
+                -moz-transform: translateX(10px);
+        }   
+}
+
+@keyframes beizer-bounce {  
+        0%, 100% {
+                transform: translateX(0px);
+        }
+        10%, 30%, 50%, 70%, 90% {
+                transform: translateX(-10px);
+        }
+        20%, 40%, 60%, 80% {
+                transform: translateX(10px);
+        }
+} 
+
 @-moz-keyframes show-and-spin {
 	0% {
 		-moz-transform:  scale(0) rotate(-90deg);
@@ -70,8 +106,19 @@
 
 .element-spin-and-show {
 	display: inline-block;
-	animation: show-and-spin 1s linear 0s normal none;
-	-webkit-animation: show-and-spin 1s linear 0s normal none;
+	animation: show-and-spin 0.5s linear 0s normal none;
+	-webkit-animation: show-and-spin 0.5s linear 0s normal none;
+}
+
+.bouncing-button {
+	display: inline-block;
+    animation: 4s cubic-bezier(0.645, 0.045, 0.355, 1) 0s normal none infinite beizer-bounce;
+	-webkit-animation: 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0s normal none infinite beizer-bounce;   
+}
+
+.bouncing-button:hover {
+	display: inline-block;
+    -webkit-transform:  scale(2);
 }
 
 .loading-spinner {

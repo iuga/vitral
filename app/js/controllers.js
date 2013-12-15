@@ -5,17 +5,22 @@ var module = angular.module('vitral', ['vitral.services']);
 module.controller('vitralController', ['$scope','$http','appConfig', function ($scope, $http, appConfig) {
     
     var imageList = [];
-    var offset = 3;
+    var offset = 0;
     var limit = appConfig.page_limit;
     
     $scope.init = function(){        
 
     };
+
+//	$scope.hideImages = function(){
+//		  $(".element-inner").hide(500);
+//	}
     
     $scope.nextPage = function()
     {
-       offset = offset + limit;
-       this.loadImages();    
+		//this.hideImages();
+        offset = offset + limit;
+        this.loadImages();    
     }; 
     
     $scope.previousPage = function()
@@ -28,10 +33,17 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
        }
        
        this.loadImages();
-    };        
+    };
+
+    $scope.goToRelativePage = function(relativePageNumber)
+    {
+       offset = relativePageNumber * limit;
+       this.loadImages();    
+    };       
     
     $scope.loadImages = function()
     {
+		imageList = [];
         $http.get(appConfig.photorankUrl, { 
             params: {
                 api_key:appConfig.photorankKey,
@@ -41,7 +53,6 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
         }).
         success(function(data, status, headers, config) {
             if(status===200){
-                imageList = [];
                 
                 angular.forEach(data.response, function(value){
                     imageList.push({
@@ -55,9 +66,18 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
             }
         }).
         error(function(data, status, headers, config) {
-            console.log("Error retriving data"+status);
+
+			for(var i=0; i<limit;i++){
+				imageList.push({
+                    image_url:'img/error.jpg', 
+                    image_label:"?"
+                });
+			}
+			
+			preload('img/error.jpg');
+			$scope.imageList = imageList;
         });
-    };    
+    }; 
     
     function preload(image_url){
         $('<img/>')[0].src = image_url;
@@ -72,10 +92,10 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
     return {
        restrict: 'A',
        transclude: true,
-       templateUrl: 'partials/ng-mock.html',
+       templateUrl: 'partials/ng-cubik-mock.html',
        link: function(scope, element, attrs, ngModel) {
         
-                var backCoolColors =  ['#E8D0A9','#B7AFA3','#C1DAD6','#F5FAFA','#ACD1E9',
+                var backCoolColors =  ['#E8D0A9','#B7AFA3','#C1DAD6','#F5FAFA','',
                                        '#6D929B','#E8D0A9','#B7AFA3','#C1DAD6','#F5FAFA',
                                        '#ACD1E9','#6D929B','#E8D0A9','#B7AFA3','#C1DAD6'];
 
@@ -92,10 +112,33 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
      };
   }])
 
-.directive('ngImageload',['$animate', function($animate) {
+.directive('ngVitralpagination', ['appConfig',function(appConfig) {
     return {
+       restrict: 'A',
+       transclude: true,
+       templateUrl: 'partials/ng-pagination.html',
+       link: function(scope, element, attrs) {
+			element.bind('click', function() {
+			});
+       }
+     };
+  }])
+
+.directive('ngImageload',['$animate', function($animate) {
+	return {
         restrict: 'A',
         link: function(scope, element, attrs) {
+
+/*
+				scope.$watch('imageList', function(oldVal, newVal){
+					if(newVal!==undefined && oldVal!==undefined){
+						console.log("oldVal:");		
+						console.log(oldVal);
+						console.log("newVal:");
+						console.log(newVal);
+					}
+				});
+*/
             element.bind('load', function() {
 				// Hide loading icon:
 				var imgContainer =  $(element).parent().parent('.element-inner');
