@@ -85,10 +85,17 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
         restrict: 'A',
         link: function(scope, element, attrs) {
             element.bind('load', function() {
-				var imgContainer =  $(element).parent('.element-inner');
-				$animate.addClass(imgContainer, 'element-spin-and-show');
+				// Hide loading icon:
+				var imgContainer =  $(element).parent().parent('.element-inner');
+				imgContainer.children('.img-loading-wrapper').remove();
+				imgContainer.children('.element-img').removeClass('element-hidden');
+				
+				// Show and animate all the images:
 				$animate.removeClass(imgContainer, 'element-hidden');
-				imgContainer.find('.loading').addClass('element-hidden');
+				$animate.addClass(imgContainer, 'element-spin-and-show');
+
+				// Show the element:
+				// imgContainer.find('.loading').addClass('element-hidden');
             });
         }
     };

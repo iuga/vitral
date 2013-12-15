@@ -73,10 +73,10 @@
 	display:hidde;
 }
 
-.img-vitral:hover {
+/*.img-vitral:hover {
 	filter: alpha(opacity=40);
 	opacity: 0.4;
-}
+}*/
 
 .img-loading-wrapper {
     bottom: 40%;

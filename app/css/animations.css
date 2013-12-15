@@ -1,23 +1,23 @@
 @-moz-keyframes beizer-spin {
 	0% {
-		transform: scale(1) rotate(0deg);
+		-moz-transform: scale(1) rotate(0deg);
 	}
 	50% {
-		transform: scale(0.8) rotate(360deg);
+		-moz-transform: scale(0.8) rotate(360deg);
 	}
 	100% {
-		transform: scale(1) rotate(720deg);
+		-moz-transform: scale(1) rotate(720deg);
 	}
 }
 @-webkit-keyframes  beizer-spin {
 	0% {
-		transform: scale(1) rotate(0deg);
+		-webkit-transform: scale(1) rotate(0deg);
 	}
 	50% {
-		transform: scale(0.8) rotate(360deg);
+		-webkit-transform: scale(0.8) rotate(360deg);
 	}
 	100% {
-		transform: scale(1) rotate(720deg);
+		-webkit-transform: scale(1) rotate(720deg);
 	}
 }
 
@@ -33,7 +33,7 @@
 	}
 }
 
-@-moz-keyframes spin {
+@-moz-keyframes show-and-spin {
 	0% {
 		-moz-transform:  scale(0) rotate(360deg);
 		opacity: 0;
@@ -44,7 +44,7 @@
 	}
 }
 
-@-webkit-keyframes spin {
+@-webkit-keyframes show-and-spin {
 	0% {
 		-webkit-transform: scale(0) rotate(360deg);
 		opacity: 0;
@@ -55,7 +55,8 @@
 	}
 }
 
-@keyframes spin {
+
+@keyframes show-and-spin {
 	0% {
 		transform:  scale(0) rotate(360deg);
 		opacity: 0;
@@ -66,16 +67,15 @@
 	}
 }
 
+
 .element-spin-and-show {
-	animation: spin 1s linear 0s normal none;
-	-webkit-animation: spin 1s linear 0s normal none ;
+	display: inline-block;
+	animation: show-and-spin 1s linear 0s normal none;
+	-webkit-animation: show-and-spin 1s linear 0s normal none;
 }
 
 .loading-spinner {
-    animation: 2s cubic-bezier(0.645, 0.045, 0.355, 1) 0s normal none infinite beizer-spin;
-    background: url("../img/olapic-logo.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
-	display: block;
-    height: 37px;
-    width: 37px;
-    position: absolute;
+	display: inline-block;
+    animation: 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0s normal none infinite beizer-spin;
+	-webkit-animation: 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0s normal none infinite beizer-spin;
 }
