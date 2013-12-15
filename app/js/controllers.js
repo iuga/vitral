@@ -5,17 +5,17 @@ var module = angular.module('vitral', ['vitral.services']);
 module.controller('vitralController', ['$scope','$http','appConfig', function ($scope, $http, appConfig) {
     
     var imageList = [];
-    var offset = 0;
+    var offset = 3;
     var limit = appConfig.page_limit;
     
     $scope.init = function(){        
-        
+
     };
     
     $scope.nextPage = function()
     {
        offset = offset + limit;
-       this.loadImages();
+       this.loadImages();    
     }; 
     
     $scope.previousPage = function()
@@ -74,8 +74,20 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
        transclude: true,
        templateUrl: 'partials/ng-mock.html',
        link: function(scope, element, attrs, ngModel) {
-			var vitralizeGallery = function () {
-			}	
+        
+                var backCoolColors =  ['#E8D0A9','#B7AFA3','#C1DAD6','#F5FAFA','#ACD1E9',
+                                       '#6D929B','#E8D0A9','#B7AFA3','#C1DAD6','#F5FAFA',
+                                       '#ACD1E9','#6D929B','#E8D0A9','#B7AFA3','#C1DAD6'];
+
+                $(".element-inner").each(function( index ) {
+                     $(this).hide()
+                            .delay( 300 * (index+1) )
+                            .css('background-color',backCoolColors[index])
+                            .removeClass('element-hidden')
+                            .addClass("element-spin-and-show")
+                            .show(400);                
+                });
+                
        }
      };
   }])
@@ -85,10 +97,10 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
         restrict: 'A',
         link: function(scope, element, attrs) {
             element.bind('load', function() {
+                
 				var imgContainer =  $(element).parent('.element-inner');
-				$animate.addClass(imgContainer, 'element-spin-and-show');
-				$animate.removeClass(imgContainer, 'element-hidden');
 				imgContainer.find('.loading').addClass('element-hidden');
+                
             });
         }
     };
