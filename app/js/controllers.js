@@ -1,6 +1,13 @@
 'use strict';
 
-var module = angular.module('vitral', ['vitral.services']);
+// Declare app level module which depends on filters, and services
+var module = angular.module('vitral', ['vitral.services','ngRoute']);
+
+module.config(['$routeProvider', function($routeProvider) {
+  $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'vitralController'});
+  $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'vitralController'});
+  $routeProvider.otherwise({redirectTo: '/view1'});
+}]);
 
 module.controller('vitralController', ['$scope','$http','appConfig', function ($scope, $http, appConfig) {
     
@@ -9,7 +16,6 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
     var limit = appConfig.page_limit;
     
     $scope.init = function(){        
-
     };
 
 //	$scope.hideImages = function(){
@@ -89,10 +95,23 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
 }])
 
 .directive('ngVitralgallery', ['appConfig','$animate', function(appConfig, $animate) {
-    return {
+	return {
        restrict: 'A',
        transclude: true,
-       templateUrl: 'partials/ng-cubik-mock.html',
+       templateUrl: function (tElement, tAttrs) {
+            if (tAttrs.theme) {
+				switch(tAttrs.theme){
+					case "rombo":
+						return 'partials/ng-mock.html';
+					case "cubik":
+						return 'partials/ng-cubik-mock.html';
+					default:
+						return 'partials/ng-cubik-mock.html';
+				}
+            } else {
+				return 'partials/ng-cubik-mock.html';
+			}
+       },
        link: function(scope, element, attrs, ngModel) {
         
                 var backCoolColors =  ['#E8D0A9','#B7AFA3','#C1DAD6','#F5FAFA','',
