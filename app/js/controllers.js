@@ -18,13 +18,8 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
     $scope.init = function(){        
     };
 
-//	$scope.hideImages = function(){
-//		  $(".element-inner").hide(500);
-//	}
-    
     $scope.nextPage = function()
     {
-		//this.hideImages();
         offset = offset + limit;
         this.loadImages();    
     }; 
@@ -39,12 +34,6 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
        }
        
        this.loadImages();
-    };
-
-    $scope.goToRelativePage = function(relativePageNumber)
-    {
-       offset = relativePageNumber * limit;
-       this.loadImages();    
     };       
     
     $scope.loadImages = function()
@@ -148,16 +137,6 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
         restrict: 'A',
         link: function(scope, element, attrs) {
 
-/*
-				scope.$watch('imageList', function(oldVal, newVal){
-					if(newVal!==undefined && oldVal!==undefined){
-						console.log("oldVal:");		
-						console.log(oldVal);
-						console.log("newVal:");
-						console.log(newVal);
-					}
-				});
-*/
             element.bind('load', function() {
 				// Hide loading icon:
 				var imgContainer =  $(element).parent().parent('.element-inner');
@@ -166,14 +145,7 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
 				
 				// Show and animate all the images:
 				$animate.removeClass(imgContainer, 'element-hidden');
-				$animate.addClass(imgContainer, 'element-spin-and-show');
-
-				// Show the element:
-				// imgContainer.find('.loading').addClass('element-hidden');
-   
-				//var imgContainer =  $(element).parent('.element-inner');
-				//imgContainer.find('.loading').addClass('element-hidden');
-                
+				$animate.addClass(imgContainer, 'element-spin-and-show');                
             });
         }
     };
