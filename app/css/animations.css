@@ -74,6 +74,18 @@
 	-webkit-animation: show-and-spin 0.5s linear 0s normal none;
 }
 
+.element-opacity-show{
+    display: inline-block;
+    animation: element-not-hidden 2s linear 0s normal none;
+	-webkit-animation: element-not-hidden 2s linear 0s normal none;
+}
+
+.element-spin-and-hide {
+	display: inline-block;
+	animation: show-and-spin 0.5s linear 0s reverse none;
+	-webkit-animation: show-and-spin 0.5s linear 0s reverse none;
+}
+
 .loading-spinner {
 	display: inline-block;
     animation: 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0s normal none infinite beizer-spin;

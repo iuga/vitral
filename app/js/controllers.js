@@ -14,14 +14,15 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
     var imageList = [];
     var offset = 0;
     var limit = appConfig.page_limit;
-    
+
     $scope.init = function(){        
     };
 
     $scope.nextPage = function()
     {
         offset = offset + limit;
-        this.loadImages();    
+        prepareForANewImage();
+        $scope.loadImages();
     }; 
     
     $scope.previousPage = function()
@@ -32,8 +33,6 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
        }else{
            offset = offset - limit;
        }
-       
-       this.loadImages();
     };       
     
     $scope.loadImages = function()
@@ -76,6 +75,12 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
     
     function preload(image_url){
         $('<img/>')[0].src = image_url;
+    }
+
+    function prepareForANewImage(){
+        //$(".img-vitral").each(function( index ) {
+        //     $(this).delay( 300 * (index+1) ).addClass('element-spin-and-hide');                
+        //}).promise().done(function(){ $scope.loadImages(); });
     }
     
     $scope.init();
@@ -138,15 +143,51 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
         link: function(scope, element, attrs) {
 
             element.bind('load', function() {
-				// Hide loading icon:
-				var imgContainer =  $(element).parent().parent('.element-inner');
-				imgContainer.children('.img-loading-wrapper').remove();
-				imgContainer.children('.element-img').removeClass('element-hidden');
+    				
+                //console.log(element);
+
+                var imgContainer =  $(element).parent().parent('.element-inner');
+
+                imgContainer.children('.img-loading-wrapper').remove();
+                imgContainer.children('.element-img').removeClass('element-hidden');                            
+                $animate.addClass(element, 'element-hidden');                
+                $animate.addClass(element, 'element-opacity-show');
+
+/*
+                $animate.removeClass(element, 'element-spin-and-show',function(){
+                    $animate.addClass(element, 'element-spin-and-hide',function(){
+                        $animate.removeClass(element, 'element-spin-and-hide',function(){
+                            $animate.addClass(element, 'element-opacity-show',function(){
+                                console.log('Animation cycle finished');
+                                imgContainer.children('.img-loading-wrapper').remove();
+				                imgContainer.children('.element-img').removeClass('element-hidden');                            
+                            });                    
+                        });                    
+                    });
+                });
+  */  
+/*
+                $animate.removeClass(imgContainer, 'element-spin-and-show');
+                $animate.addClass(imgContainer, 'element-spin-and-hide',function(){
+
+                    console.log("$animate finished");
+
+                    // Hide loading icon:
+				    
+                    imgContainer.children('.img-loading-wrapper').remove();
+				    imgContainer.children('.element-img').removeClass('element-hidden');
 				
-				// Show and animate all the images:
-				$animate.removeClass(imgContainer, 'element-hidden');
-				$animate.addClass(imgContainer, 'element-spin-and-show');                
+				    // Show and animate all the images:
+				
+				    $animate.removeClass(imgContainer, 'element-hidden');
+                    $animate.removeClass(imgContainer, 'element-spin-and-hide');
+				    $animate.addClass(imgContainer, 'element-spin-and-show');                
+
+
+                });
+  */ 
             });
+
         }
     };
 }]);

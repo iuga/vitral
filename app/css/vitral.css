@@ -80,7 +80,10 @@
 
 .element-hidden {
 	opacity: 0;
-	display:hidde;
+}
+
+.element-not-hidden {
+	opacity: 1;
 }
 
 .img-loading-wrapper {
