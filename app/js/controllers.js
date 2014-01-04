@@ -1,6 +1,5 @@
 'use strict';
 
-// Declare app level module which depends on filters, and services
 var module = angular.module('vitral', ['vitral.services','ngRoute']);
 
 module.config(['$routeProvider', function($routeProvider) {
@@ -9,7 +8,7 @@ module.config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/view1'});
 }]);
 
-module.controller('vitralController', ['$scope','$http','appConfig', function ($scope, $http, appConfig) {
+module.controller('vitralController', ['$scope','$http','appConfig','$animate', function ($scope, $http, appConfig, $animate) {
     
     var imageList = [];
     var offset = 0;
@@ -21,8 +20,7 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
     $scope.nextPage = function()
     {
         offset = offset + limit;
-        prepareForANewImage();
-        $scope.loadImages();
+		$scope.changeImages();
     }; 
     
     $scope.previousPage = function()
@@ -31,9 +29,11 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
        if(lower_limit<0){
            offset = 0;
        }else{
-           offset = offset - limit;
+			offset = offset - limit;
+			$scope.changeImages();
        }
-    };       
+	   
+    };    
     
     $scope.loadImages = function()
     {
@@ -53,38 +53,35 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
                         image_url:value.normal_image, 
                         image_label:value.cleanCaption
                     });
-                    preload(value.normal_image);
                 });
 
                 $scope.imageList = imageList;
             }
         }).
         error(function(data, status, headers, config) {
-
 			for(var i=0; i<limit;i++){
 				imageList.push({
                     image_url:'img/error.jpg', 
                     image_label:"?"
                 });
 			}
-			
-			preload('img/error.jpg');
 			$scope.imageList = imageList;
         });
-    }; 
-    
-    function preload(image_url){
-        $('<img/>')[0].src = image_url;
-    }
+    };
 
-    function prepareForANewImage(){
-        //$(".img-vitral").each(function( index ) {
-        //     $(this).delay( 300 * (index+1) ).addClass('element-spin-and-hide');                
-        //}).promise().done(function(){ $scope.loadImages(); });
-    }
+	$scope.changeImages = function(){
+		var allImages = $('.img-vitral');
+		allImages.removeClass('element-fadein-show');
+		$.when(
+			$(allImages).each(function( index ) {
+				$(this).delay( 50 * (index+1)).addClass('element-fadeout').hide(200);
+			})
+		).done(function() {
+			$scope.loadImages();
+		});
+	};
     
     $scope.init();
-    $scope.loadImages();
     
 }])
 
@@ -108,18 +105,20 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
        },
        link: function(scope, element, attrs, ngModel) {
         
-                var backCoolColors =  ['#E8D0A9','#B7AFA3','#C1DAD6','#F5FAFA','',
+                var backCoolColors =  ['#E8D0A9','#B7AFA3','#C1DAD6','#F5FAFA','#C1DAD6',
                                        '#6D929B','#E8D0A9','#B7AFA3','#C1DAD6','#F5FAFA',
                                        '#ACD1E9','#6D929B','#E8D0A9','#B7AFA3','#C1DAD6'];
 
-                $(".element-inner").each(function( index ) {
+                $.when($(".element-inner").each(function( index ) {
                      $(this).hide()
-                            .delay( 300 * (index+1) )
+                            .delay( 75 * (index+1) )
                             .css('background-color',backCoolColors[index])
                             .removeClass('element-hidden')
                             .addClass("element-spin-and-show")
                             .show(400);                
-                });
+                })).done(function() {
+					scope.loadImages();
+				});
                 
        }
      };
@@ -140,52 +139,29 @@ module.controller('vitralController', ['$scope','$http','appConfig', function ($
 .directive('ngImageload',['$animate', function($animate) {
 	return {
         restrict: 'A',
+		transclude: true,
+
         link: function(scope, element, attrs) {
 
-            element.bind('load', function() {
-    				
-                //console.log(element);
+			element.bind('load', function() {
 
-                var imgContainer =  $(element).parent().parent('.element-inner');
+				$(element).show();
+				$animate.removeClass(element, 'element-fadeout');
 
-                imgContainer.children('.img-loading-wrapper').remove();
-                imgContainer.children('.element-img').removeClass('element-hidden');                            
-                $animate.addClass(element, 'element-hidden');                
-                $animate.addClass(element, 'element-opacity-show');
+				var imgContainer =  $(element).parent().parent('.element-inner');
 
-/*
-                $animate.removeClass(element, 'element-spin-and-show',function(){
-                    $animate.addClass(element, 'element-spin-and-hide',function(){
-                        $animate.removeClass(element, 'element-spin-and-hide',function(){
-                            $animate.addClass(element, 'element-opacity-show',function(){
-                                console.log('Animation cycle finished');
-                                imgContainer.children('.img-loading-wrapper').remove();
-				                imgContainer.children('.element-img').removeClass('element-hidden');                            
-                            });                    
-                        });                    
-                    });
-                });
-  */  
-/*
-                $animate.removeClass(imgContainer, 'element-spin-and-show');
-                $animate.addClass(imgContainer, 'element-spin-and-hide',function(){
+				// Remove loading icon...
+				imgContainer.children('.img-loading-wrapper').hide();
+				imgContainer.children('.element-img').removeClass('element-hidden');
 
-                    console.log("$animate finished");
+				// Show the image:
+				if(imgContainer.hasClass("element-hidden")){
+					$animate.removeClass(imgContainer, 'element-hidden');
+				}
 
-                    // Hide loading icon:
-				    
-                    imgContainer.children('.img-loading-wrapper').remove();
-				    imgContainer.children('.element-img').removeClass('element-hidden');
-				
-				    // Show and animate all the images:
-				
-				    $animate.removeClass(imgContainer, 'element-hidden');
-                    $animate.removeClass(imgContainer, 'element-spin-and-hide');
-				    $animate.addClass(imgContainer, 'element-spin-and-show');                
-
-
-                });
-  */ 
+				// Show the image:
+				$animate.addClass(element, 'element-fadein-show');
+						
             });
 
         }

@@ -33,6 +33,12 @@
 	}
 }
 
+.loading-spinner {
+	display: inline-block;
+    animation: 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0s normal none infinite beizer-spin;
+	-webkit-animation: 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0s normal none infinite beizer-spin;
+}
+
 @-moz-keyframes show-and-spin {
 	0% {
 		-moz-transform:  scale(0) rotate(-90deg);
@@ -67,17 +73,10 @@
 	}
 }
 
-
 .element-spin-and-show {
 	display: inline-block;
 	animation: show-and-spin 0.5s linear 0s normal none;
 	-webkit-animation: show-and-spin 0.5s linear 0s normal none;
-}
-
-.element-opacity-show{
-    display: inline-block;
-    animation: element-not-hidden 2s linear 0s normal none;
-	-webkit-animation: element-not-hidden 2s linear 0s normal none;
 }
 
 .element-spin-and-hide {
@@ -86,8 +85,79 @@
 	-webkit-animation: show-and-spin 0.5s linear 0s reverse none;
 }
 
-.loading-spinner {
-	display: inline-block;
-    animation: 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0s normal none infinite beizer-spin;
-	-webkit-animation: 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0s normal none infinite beizer-spin;
+@-moz-keyframes fadein-show {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 100;
+	}
 }
+
+@-webkit-keyframes fadein-show {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 100;
+	}
+}
+
+
+@keyframes fadein-show {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 100;
+	}
+}
+
+.element-fadein-show {
+	display: inline-block;
+	animation: fadein-show 0.5s linear 0s normal none;
+	-webkit-animation: fadein-show 0.5s linear 0s normal none;
+}
+
+@-moz-keyframes fadeout-hide {
+	0% {
+		opacity: 100;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+@-webkit-keyframes fadeout-hide {
+	0% {
+		opacity: 100;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+
+@keyframes fadeout-hide {
+	0% {
+		opacity: 100;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+.element-fadeout-hide {
+	animation: fadeout-hide 1s;
+	-webkit-animation: fadeout-hide 1s;
+}
+
+.element-fadeout {
+	opacity: 0;
+    -webkit-transition: all .7s ease-in-out;
+    -moz-transition: all .7s ease-in-out;
+    -o-transition: all .7s ease-in-out;
+    transition: all .7s ease-in-out;
+}
+
+
