@@ -148,6 +148,19 @@
     right: 0;
 }
 
+.element-caption-rotated {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    left: -50%;
+    right: 0;
+    top: 150%;
+    bottom: -20%;
+    padding:20px;
+}
+
 .vitral-pagination{
     width: 100%;
     text-align: center;
