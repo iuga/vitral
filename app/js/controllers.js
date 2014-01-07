@@ -74,7 +74,8 @@ module.controller('vitralController', ['$scope','$http','appConfig','$animate', 
 		allImages.removeClass('element-fadein-show');
 		$.when(
 			$(allImages).each(function( index ) {
-				$(this).delay( 50 * (index+1)).addClass('element-fadeout').hide(200);
+                $(this).parent().parent('.element-inner').children('.img-loading-wrapper').show()
+                $(this).delay( 50 * (index+1)).addClass('element-fadeout').hide(200);
 			})
 		).done(function() {
 			$scope.loadImages();
